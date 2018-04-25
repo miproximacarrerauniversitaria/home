@@ -1,0 +1,244 @@
+@import "_variables";
+@import "_queries";
+
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Lato', helvetica;
+	color: $gris;
+}
+
+body{
+	background-color: #fafafa;
+}
+.is-blur{
+	filter: blur(2px);
+}
+.contenedor-general{
+	position: relative;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: 1fr;
+	grid-gap: $gutter-d;
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	padding: $gutter-grid*5 $gutter-grid*3;
+	background-image: url('../imagenes/inspiration.jpg');
+	background-size: cover;
+	@include querie(tablet){
+		grid-template-columns: 1fr;
+		grid-template-rows: repeat(2, 1fr);
+		padding: $gutter-grid*2 $gutter-d;
+	}
+	&:before{
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 1000vh;
+		background-color: rgba($blue-life, .90);
+	}
+}
+.elemento{
+	width: 100%;
+	z-index: 300;
+}
+.titulo{
+	font-weight: 700;
+	font-size: $header-1;
+	color: #fff;
+	padding-bottom: $gutter-r;
+	@include querie(mobile){
+		font-size: $header-3;
+	}
+
+}
+.titulo--subrayado{
+	width: 120px;
+	border: 2px solid #ff2257;
+}
+.parrafo--uno{
+	margin-top: $gutter-grid*2;
+	margin-bottom: $gutter-d;
+}
+.parrafo{
+	color: #fff;
+	font-size: $title-2+1;
+}
+.contenedor-formulario{
+	border-radius: 5px;
+	padding: $gutter-d;
+	background-color: rgba(#fff, .51);
+}
+.formulario__item{
+	margin-bottom: ($gutter-r)-10px;
+}
+.formulario__label{
+	display: inline-block;
+	margin-bottom: ($gutter-r)-10px;
+}
+.formulario__input, .formulario__select{
+	display: inline-block;
+	width: 100%;
+	height: 42px;
+	padding-left: $gutter-r;
+	border: none;
+	border-radius: 3px;
+	background-color: #fff;
+}
+.formulario__submit{
+	margin-top: $gutter-d;
+	border: none;
+	padding: ($gutter-r)-5 $gutter-d;
+	font-size: $title-2;
+	color: #fff;
+	border-radius: 3px;
+	background-color: #ff2257;
+	&:hover{
+		background-color: darken(#ff2257, 7);
+		cursor: pointer;
+	}
+	@include querie(mobile){
+		width: 100%;
+	}
+
+}
+
+//pie de página
+.footer{
+	position: absolute;
+	width: 100%;
+	padding: 1em;
+	background-color: $bg-footer;
+}
+.footer__author{
+	font-size: 1em;
+	color: $text-footer;
+	@media screen and(max-width: 650px){
+		font-size: .9em;
+	}
+}
+.footer__link{
+	text-decoration: none;
+	color: rgba(#ccc, .70);
+	&:hover{
+		border-bottom: 1px solid #ccc;
+		color: rgba(#ccc, .90);
+	}
+}
+
+//ventana modal que se muestra al enviar los datos
+.js-modal__close{
+	position: fixed;
+	top: 0;
+	width: 21px;
+	height: 21px;
+	padding: 30px 20px;
+	cursor: pointer;
+  	&:after, &:before{
+  		content:"";
+	    position: absolute;
+	    top: 40px;
+	    width: 2rem;
+	    height: 2px;
+	    background-color: #999;
+	    transform: rotate(45deg);
+	    opacity: .6; 
+  	}
+	&:before {
+		right: 0; 
+	}
+	&:after{
+		right: 0;
+    	transform: rotate(-45deg); 
+	}
+	&:hover:before{
+		background-color: #fff;
+	}
+	&:hover:after{
+		background-color: #fff;
+	}
+
+}
+.js-modal{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 350;
+	width: 100%;
+	height: 100vh;
+	padding: 0 $gutter-grid;
+	overflow-y: auto;
+	background-color: rgba(#000, .88);
+	animation: fade 1s forwards;
+	transition: 10ms;
+	opacity: 0.8;
+	@keyframes fade{
+		100%{
+			opacity: 1;
+			transition: 10ms;
+		}
+	}
+}
+.js-modal__content{
+	position: relative;
+	top: -5%;
+	width: 400px;
+	padding-bottom: $gutter-d;
+	border-radius: 3px;
+	overflow-y: auto;
+	background-color: #fff;
+	@include querie(mobile-small){
+		width: 100%;
+		padding-bottom: $gutter-d;
+	}
+	@media screen and (orientation: landscape) and (max-width: 850px){
+		top: 30%;
+	}
+}
+.js-modal__header{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 55px;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	background-color: rgba($blue-life, .99);
+	padding: $gutter-d;
+}
+.js-modal__title{
+	color: #fff;
+	font-size: $title-1;
+	
+}
+.js-modal__footer{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.js-modal__icon{
+	width: 120px;
+	height: 120px;
+	margin: $gutter-grid 0;
+	object-fit: cover;
+	@include querie(mobile-small){
+		width: 100px;
+		height: 100px;
+		margin: $gutter-d 0;
+	}
+}
+.js-modal__message{
+	text-align: center;
+	padding: 0 $gutter-d;
+	font-size: $title-2;
+	@include querie(mobile){
+		font-size: $title-3;
+	}
+}
